@@ -15,6 +15,11 @@ const findTuits = async (req, res) => {
     res.json(tuits);
 }
 
+const findTuitById = async (req, res) => {
+    const tuit = await tuitsDao.findTuitById(req.params.tid)
+    res.json(tuit);
+}
+
 const updateTuit = async (req, res) => {
     const tuitdIdToUpdate = req.params.tid;
     const updates = req.body;
@@ -31,6 +36,7 @@ const deleteTuit = async (req, res) => {
 export default (app) => {
     app.post('/api/tuits', createTuit);
     app.get('/api/tuits', findTuits);
+    app.get('/api/tuits/:tid', findTuitById);
     app.put('/api/tuits/:tid', updateTuit);
     app.delete('/api/tuits/:tid', deleteTuit);
 }
